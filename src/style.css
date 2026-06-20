@@ -1,0 +1,213 @@
+:root {
+  /* 使用 camelCase 命名的 CSS 变量以符合命名约定 */
+  --primaryColor: #f58026; /* Unity 橙色 */
+  --primaryColorGlow: rgba(245, 128, 38, 0.15);
+  --secondaryColor: #00b4d8; /* 青蓝色 */
+  --secondaryColorGlow: rgba(0, 180, 216, 0.15);
+  --backgroundColor: #0a0b0e;
+  --cardBgColor: rgba(18, 22, 30, 0.7);
+  --cardBorderColor: rgba(255, 255, 255, 0.08);
+  --textColor: #a0aec0;
+  --textHighlightColor: #ffffff;
+  --fontSans: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --fontMono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: var(--backgroundColor);
+  color: var(--textColor);
+  font-family: var(--fontSans);
+  overflow-x: hidden;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  min-height: 100vh;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--backgroundColor);
+}
+::-webkit-scrollbar-thumb {
+  background: #1c202e;
+  border-radius: 5px;
+  border: 2px solid var(--backgroundColor);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primaryColor);
+}
+
+/* 链接样式 */
+a {
+  color: var(--primaryColor);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--textHighlightColor);
+}
+
+/* 基础排版 */
+h1, h2, h3, h4 {
+  font-family: var(--fontSans);
+  color: var(--textHighlightColor);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 类名使用 PascalCase */
+.MainLayout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(245, 128, 38, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(0, 180, 216, 0.04) 0%, transparent 40%);
+}
+
+.GridBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.007) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.007) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.MainContent {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+/* 毛玻璃卡片通用样式 */
+.GlassCard {
+  background: var(--cardBgColor);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--cardBorderColor);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.GlassCard:hover {
+  border-color: rgba(245, 128, 38, 0.25);
+  box-shadow: 0 15px 50px -10px rgba(245, 128, 38, 0.08);
+  transform: translateY(-4px);
+}
+
+/* 按钮基础样式 */
+.PrimaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primaryColor) 0%, #e06d15 100%);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(245, 128, 38, 0.2);
+}
+
+.PrimaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(245, 128, 38, 0.35);
+  filter: brightness(1.1);
+}
+
+.SecondaryButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--textHighlightColor);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid var(--cardBorderColor);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.SecondaryButton:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* 渐变标题文本 */
+.GradientText {
+  background: linear-gradient(135deg, var(--textHighlightColor) 30%, #a0aec0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.PrimaryGradientText {
+  background: linear-gradient(135deg, var(--primaryColor) 0%, var(--secondaryColor) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 滚动动画指令与回退支持类 */
+.ScrollReveal {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ScrollReveal.Visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes FadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    .ScrollReveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: FadeInUp auto linear backwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 25%;
+    }
+  }
+}
